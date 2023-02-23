@@ -50,7 +50,7 @@ class OrbitalMotion:
         return x, y, z, xeq, yeq, zeq, RA, Decl, r, L, M, oblecl
     
     """
-        The following methods are used for calculating the moon and planet's
+        The following methods are used for calculating the moon and planets'
         positions on day d. It's important to note that the unit measurements described here
         for the moon are in earth radii, while the unit measurements for the other planets are in
         astronomical units (au).
@@ -70,8 +70,8 @@ class OrbitalMotion:
         # Convert to longitude, latitude, distance
         long, lat, r = Coordinates.SphericalCoords(xeclip, yeclip, zeclip)
 
-        # Peturbations
-        long, lat, r = Peturbations.peturPlanets(n, d, M, N, w, long, lat, r)
+        # Perturbations
+        long, lat, r = Perturbations.perturPlanets(n, d, M, N, w, long, lat, r)
     
         return xeclip, yeclip, zeclip, long, lat, r
     
@@ -304,36 +304,36 @@ class OrbitalElements:
     
 
 """
-    A series of functions for calculating the peturbations of the moon,
+    A series of functions for calculating the perturbations of the moon,
     jupiter, and saturn, as they significantly affect the accuracy of the
     orbital calculation.
 """
-class Peturbations:
+class Perturbations:
     """
         TODO: ADD comment
     """
-    def peturPlanets(n, d, M, N, w, long, lat, r):
-        # Peturbations
+    def perturPlanets(n, d, M, N, w, long, lat, r):
+        # Perturbations
         if (n == 4):
             sat_arr = OrbitalElements.getPlan(5,d)
-            long += Peturbations.jupPetur(M, sat_arr[5])
+            long += Perturbations.jupPertur(M, sat_arr[5])
         elif (n == 5):
             jup_arr = OrbitalElements.getPlan(4, d)
-            diff_arr = Peturbations.satPetur(jup_arr[5], M)
+            diff_arr = Perturbations.satPertur(jup_arr[5], M)
             long += diff_arr[0]
             lat += diff_arr[1]
         elif (n == 0):
             sun_arr = OrbitalMotion.sunPos(d)
-            diff_arr = Peturbations.moonPeturSetup(sun_arr[9], N, w, sun_arr[10], M)
+            diff_arr = Perturbations.moonPerturSetup(sun_arr[9], N, w, sun_arr[10], M)
             long += diff_arr[0]
             lat += diff_arr[1]
             r += diff_arr[2]
         return long, lat, r
         
     """
-        Moon peturbation calculations
+        Moon perturbation calculations
     """
-    def moonPetur(Ms, Mm, D, F):
+    def moonPertur(Ms, Mm, D, F):
         dif_lon = 0.0
         dif_lon -= 1.274 * sind(Mm - 2*D)
         dif_lon += 0.658 * sind(2*D)
@@ -359,27 +359,27 @@ class Peturbations:
         return dif_lon, dif_lat, dif_r
     
     # Takes orbital calclation values and calculates values needed
-    # for the moon peturbation
+    # for the moon perturbation
         # Ls  = Sun's mean longitude
         # Ms = Sun's mean anomaly 
         # All other values are for the moon
-    def moonPeturSetup(Ls, N, w, Ms, Mm):
+    def moonPerturSetup(Ls, N, w, Ms, Mm):
         # Moon's Mean Longitude 
         Lm = rev(N + w + Mm)
         # Moon's mean Elongation
         D = rev(Lm - Ls)
         # Moon's Argument of Latitude
         F = rev(Lm - N)
-        # TODO: Rewrite so that this returns moonPetur(Ms, Mm, D, F) instead
-        return Peturbations.moonPetur(Ms, Mm, D, F)
+        # TODO: Rewrite so that this returns moonPertur(Ms, Mm, D, F) instead
+        return Perturbations.moonPertur(Ms, Mm, D, F)
     
     """
-        Jupiter and Saturn peturbation calculations
+        Jupiter and Saturn perturbation calculations
 
         Mj = mean anomaly of Jupiter
         Ms = mean anomaly of Saturn
     """
-    def jupPetur(Mj, Ms):
+    def jupPertur(Mj, Ms):
         diff_long = 0.0
         diff_long -= 0.332 * sind(2 * Mj - 5 * Ms - 67.6)
         diff_long -= 0.056 * sind(2 * Mj - 2 * Ms + 21)
@@ -390,7 +390,7 @@ class Peturbations:
         diff_long -= 0.016 * sind(Mj - 5 * Ms - 69)
         return diff_long
     
-    def satPetur(Mj, Ms):
+    def satPertur(Mj, Ms):
         diff_long = 0.0
         diff_long += 0.812 * sind(2 * Mj - 5 * Ms - 67.6)
         diff_long -= 0.229 * cosd(2 * Mj - 4 * Ms - 2)
@@ -408,7 +408,7 @@ class Peturbations:
 
 """
     A series of miscellaneous functions for 
-    calculating trigonmetry values using degrees instead of radians. 
+    calculating trigonmetric values using degrees instead of radians. 
     Simplifies planetary calculations.
 """
 
