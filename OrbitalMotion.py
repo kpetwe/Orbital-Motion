@@ -1,7 +1,7 @@
 from math import *
 
 """
-    Calculates orbital motion of planets with an error of at most 1-2 arc minutes.
+    Calculates planetary positions of planets with an error of at most 1-2 arc minutes.
     All formulae used in this file are courtesy of https://www.stjarnhimlen.se/comp/tutorial.html#4.
     Contains methods for calculating between coordinate systems (elliptical and equatorial)
     and for standard heliocentric and geocentric models.
