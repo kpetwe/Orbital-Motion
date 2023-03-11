@@ -16,6 +16,19 @@ class OrbitalMotion:
         d = 367 * y - 7 * (y + (m + 9) // 12) // 4 - 3 * ((y + (m - 9) // 7 ) // 100 + 1) // 4 + 275 * m // 9 + D - 730515
         return d + UT / 24.0
     
+    # TODO: test
+    """
+        TESTING -- Sidereal Time
+        long = local longitude
+        East Longitude positive, West negative
+    """
+    def sidereal(UT, Ls, long):
+        GMST0 = Ls + 180
+        GMST = GMST0 + UT
+        LST = GMST + long
+        return LST
+
+
     """
         Longitudinal Precission: since all calculations are relative to the 
         celestial equator / ecliptic center at the moment, this function converts
@@ -72,6 +85,7 @@ class OrbitalMotion:
 
         # Perturbations
         long, lat, r = Perturbations.perturPlanets(n, d, M, N, w, long, lat, r)
+        xeclip, yeclip, zeclip = Coordinates.rect(long, lat, r)
     
         return xeclip, yeclip, zeclip, long, lat, r
     
@@ -199,6 +213,31 @@ class Coordinates:
         zequat = yeclip * sind(oblecl) + zeclip * cosd(oblecl)
         return xequat, yequat, zequat
     
+    # TODO: Test
+    """
+        TESTING -- Azimuthal coordinates conversion
+        - converts RA, Decl -> az, alt
+        - correct for alt
+    """
+    def azimuthal(RA, Decl, LST, lat):
+        # -180 to +180 degrees-- 0 = object directly south,
+        # negative = east of south, positive - west of south
+        # outside of interval-- rev
+        HA = LST - RA
+        print('HA = ', HA)
+        x,y,z = Coordinates.rect(HA, Decl)
+        xhor = x * sind(lat) - z * cosd(lat)
+        yhor = y
+        zhor = x * cosd(lat) + z * sind(lat)
+
+        az, alt, r = Coordinates.sphere(xhor, yhor, zhor)
+        az += 180
+
+        return az, alt 
+
+
+
+
 
 
 """
