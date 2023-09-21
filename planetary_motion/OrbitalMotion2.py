@@ -98,8 +98,8 @@ def sunPos(d = 0.0, ct = "rect", csys = "eclip"):
         (only applies to geocentric system-- heliocentric only uses the ecliptic coordinate system)
         Note for geocentric: spherical ecliptical = Longitude / Latitude / r
         and spherical equatorial = RA / Decl / r
-    geoc = bool for whether you want geocentric or heliocentric coordinates*
-    *For the moon, the coordinates will be geocentric
+    geoc = bool for whether you want geocentric or heliocentric coordinates**
+    ** the moon's coordinates are only provided using the geocentric model
 """
 def getPlanData(d = 31, m = 12, y = 1999, ut = 0.0, p = "mercury", ct = "rect", csys = "equat", geoc = True):
     d = date(d, m, y, ut)
@@ -107,6 +107,13 @@ def getPlanData(d = 31, m = 12, y = 1999, ut = 0.0, p = "mercury", ct = "rect", 
     if (n == -1):
         print("Please enter a valid planet name.")
         return 0, 0, 0
+    if (n == 0):
+        moon_arr = getPlanPos(n, d)
+        if (csys == "equat"):
+            moon_arr = Coordinates.ecEq(moon_arr[0], moon_arr[1], moon_arr[2], sunPos(d, csys="pertur")[3])
+        if (ct == "sphere"):
+            moon_arr = Coordinates.sphere(moon_arr[0], moon_arr[1], moon_arr[2])
+        return moon_arr
     if (geoc):
         return getPlanPosGeo(n, d, ct, csys)
 
