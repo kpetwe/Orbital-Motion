@@ -11,4 +11,4 @@ Perturbations.py (Revises the coordinates of the Moon, Jupiter, and Saturn due t
 Trig.py (Used for radian/degree conversions and for keeping outputted angles between 0 and 360 degrees)
 
 ### WXML-Testing notebook
-This file contains the graphs and entropy data used in the WXML presentation, along with sample code for using the OrbitalMotion file. It is currently being revised for the package.
+This file contains the graphs and entropy data used in the WXML presentation, along with sample code for using the original OrbitalMotion file. It is currently being revised for the package.
