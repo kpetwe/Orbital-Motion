@@ -49,6 +49,7 @@ merc_arr = om.getPlanData(d = 19, m = 4, y = 1990, p = "mercury", ct="sphere", g
 ```
 
 This method will return the x-coordinate (or angle), y-coordinate (or angle), and z-coordinate (or magnitude of distance). <br>
+
 Side note: For latitude/longitudinal coordinates, use ecliptic spherical, and for Right-Ascension/Declination coordinates, use equatorial spherical. Also, note that all spherical coordinates are given in degrees and not in hours.
 
 ### WXML-Testing notebook
