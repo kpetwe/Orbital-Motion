@@ -1,5 +1,5 @@
 from . import OrbitalElements
-from . import OrbitalMotion2
+from . import OrbitalMotion
 from . import Trig
 
 """
@@ -24,7 +24,7 @@ def perturPlanets(n, d, M, N, w, long, lat, r):
         long += diff_arr[0]
         lat += diff_arr[1]
     elif (n == 0):
-        sun_arr = OrbitalMotion2.sunPos(d, csys = "pertur")
+        sun_arr = OrbitalMotion.sunPos(d, csys = "pertur")
         diff_arr = moonPerturSetup(sun_arr[0], N, w, sun_arr[1], M)
         long += diff_arr[0]
         lat += diff_arr[1]

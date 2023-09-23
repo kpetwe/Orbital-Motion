@@ -2,17 +2,16 @@ from math import *
 from . import Trig
 
 """
-Series of methods that allow us to convert between various coordinate systems when
+This module allows us to convert between various coordinate systems when
 calculating / presenting orbit data.
 Conversions mentioned include:
     Rectangular - Spherical coordinates
     Equatorial - Ecliptic coordinates
 
-This class also allows us to derive the actual Ecliptic and Spherical coordinates
-from the orbital elements.
+This also allows us to derive the Ecliptic coordinates from the orbital elements.
 """
 """
-    Derivations of the Ecliptical and Spherical coordinates using the orbital elements.
+    Derivation of the Ecliptical coordinates using the orbital elements.
 """
 def EclipticCoords(r, N, v, w, i):
     xeclip = r * ( Trig.cosd(N) * Trig.cosd(v+w) - Trig.sind(N) * Trig.sind(v+w) * Trig.cosd(i) )

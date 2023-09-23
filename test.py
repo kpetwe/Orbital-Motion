@@ -5,7 +5,7 @@ from scipy.fft import fft, ifft
 from scipy.signal import find_peaks
 from scipy.stats import entropy as ent
 
-from planetary_motion import OrbitalMotion2 as om
+from planetary_motion import OrbitalMotion as om
 from planetary_motion import Coordinates
 
 
