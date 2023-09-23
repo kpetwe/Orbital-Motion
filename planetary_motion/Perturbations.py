@@ -16,7 +16,6 @@ def perturPlanets(n, d, M, N, w, long, lat, r):
     # Perturbations
     if (n == 4):
         sat_arr = OrbitalElements.getPlan(5, d)
-        # "sat_arr[5]"
         long += jupPertur(M, sat_arr[5])
     elif (n == 5):
         jup_arr = OrbitalElements.getPlan(4, d)

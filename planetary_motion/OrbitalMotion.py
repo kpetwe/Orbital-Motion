@@ -44,8 +44,8 @@ def precession(d, epoch=2000.0):
     ut = universal time (as a decimal)
     ct = coordinate type (either "rect" or "sphere")
     csys = coordinate system (either "eclip" or "equat")
-        Note: spherical ecliptical = Longitude / Latitude / r
-        and spherical equatorial = RA / Decl / r
+        Note: spherical ecliptical = Longitude / Latitude / magnitude of distance
+        and spherical equatorial = RA / Decl / magnitude of distance
 """
 def getSunData(d = 31, m = 12, y = 1999, ut = 0.0, ct = "rect", csys = "eclip"):
     d = date(d, m, y, ut)
