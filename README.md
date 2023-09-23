@@ -29,6 +29,7 @@ getSunData() has the following parameters:
 ```python
 sun_arr = om.getSunData(d = 19, m = 4, y = 1990, ut = 0.0, ct = "sphere", csys = "eclip")
 ```
+This method will return the x-coordinate (or angle), y-coordinate (or angle), z-coordinate (or magnitude of distance), and the obliquity of the ecliptic. <br>
 
 Similarly, the method getPlanData() will return the requested data for a planet (or the moon). As of this point in time, planetary-motion returns the heliocentric ecliptic
 coordinates for Mercury, Venus, Mars, Jupiter, and Saturn, and returns the geocentric ecliptic and equatorial coordinates for these planets and the Moon. <br>
@@ -47,6 +48,7 @@ getPlanData() has the following parameters:
 merc_arr = om.getPlanData(d = 19, m = 4, y = 1990, p = "mercury", ct="sphere", geoc=False)
 ```
 
+This method will return the x-coordinate (or angle), y-coordinate (or angle), and z-coordinate (or magnitude of distance). <br>
 Side note: For latitude/longitudinal coordinates, use ecliptic spherical, and for Right-Ascension/Declination coordinates, use equatorial spherical. Also, note that all spherical coordinates are given in degrees and not in hours.
 
 ### WXML-Testing notebook
