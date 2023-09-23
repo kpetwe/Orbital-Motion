@@ -43,9 +43,9 @@ getPlanData() has the following parameters:
 - geoc - boolean = True for a geocentric orbit, False for heliocentric* - default "True"
     - *The Moon's coordinates will always be geocentric, and as of this moment heliocentric will only return ecliptic coordinates
 
-'''python
+```python
 merc_arr = om.getPlanData(d = 19, m = 4, y = 1990, p = "mercury", ct="sphere", geoc=False)
-'''
+```
 
 Side note: For latitude/longitudinal coordinates, use ecliptic spherical, and for Right-Ascension/Declination coordinates, use equatorial spherical. Also, note that all spherical coordinates are given in degrees and not in hours.
 
